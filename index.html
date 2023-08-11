@@ -1,0 +1,52 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Kompresi Gambar Pemandangan Kompleks Dengan Objek Utama Gunung menggunakan Metode CAE</title>
+  </head>
+  <body>
+    <h1>Kompresi Gambar Pemandangan Kompleks Dengan Objek Utama Gunung menggunakan Metode CAE</h1>
+
+    <h2>Upload Image</h2>
+<form method="post" enctype="multipart/form-data">
+  <input type="file" name="image" accept=".jpg">
+  <input type="submit" value="Kompresi">
+</form>
+
+    {% if original_image %}
+      <h2>Original Image</h2>
+      <p>Size: {{ original_image_size }} KB</p>
+      <img src="{{ original_image }}" style="max-width: 500px">
+      <h2>Download Images</h2>
+      <a href="{{ original_image }}" download="original_image.jpg">Download Original Image</a>
+
+      <h2>Compressed Image</h2>
+      <p>Size: {{ compressed_image_size }} KB</p>
+      <img src="{{ compressed_image }}" style="max-width: 500px;">
+
+      <h2>Download Images</h2>
+      <a href="{{ compressed_image }}" download="compressed_image.jpg">Download Compressed Image</a>
+
+
+      {% if decompressed_image %}
+        <h2>Decompressed Image</h2>
+        <p>Size: {{ decompressed_image_size }} KB</p>
+        <img src="{{ decompressed_image }}" style="max-width: 500px;">
+        <h2>Download Decompressed Image</h2>
+        <a href="{{ decompressed_image }}" download="decompressed_image.jpg">Download Decompressed Image</a>
+      {% else %}
+        <h2>Decompress</h2>
+        <form method="post" enctype="multipart/form-data" action="/decompress">
+          <input type="file" name="compressed_image">
+          <input type="submit" value="Decompress">
+        </form>
+      {% endif %}
+    {% endif %}
+
+    {% if decompressed_image %}
+      <!-- Tambahkan menu kembali ke halaman utama -->
+      <h2>Back to Home</h2>
+      <a href="/back-to-home">Back to Home</a>
+    {% endif %}
+
+  </body>
+</html>
